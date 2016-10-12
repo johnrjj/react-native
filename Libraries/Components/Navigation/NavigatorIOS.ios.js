@@ -836,6 +836,11 @@ var NavigatorIOS = React.createClass({
   },
 
   _handleNavigationComplete: function(e: Event) {
+    // Don't propagate to other NavigatorIOS instances this is nested in:
+    // Hotfix for my hackathon :-)
+    e.stopPropagation();
+    
+    
     if (this._toFocusOnNavigationComplete) {
       this._getFocusEmitter().emit('focus', this._toFocusOnNavigationComplete);
       this._toFocusOnNavigationComplete = null;
